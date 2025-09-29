@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= player.name %> - Stats</title>
+</head>
+<body>
+  <p><a href="/players">Back to Players</a></p>
+  <h1><%= player.name %> - Stats</h1>
+  <ul>
+    <li>Belt: <strong><%= player.belt %></strong></li>
+    <li>Age: <strong><%= player.age ?? '-' %></strong></li>
+    <li>Weight (kg): <strong><%= player.weightKg ?? '-' %></strong></li>
+    <li>Wins: <strong><%= player.wins %></strong></li>
+    <li>Losses: <strong><%= player.losses %></strong></li>
+    <li>Draws: <strong><%= player.draws %></strong></li>
+    <li>Total Fights: <strong><%= player.wins + player.losses + player.draws %></strong></li>
+    <li>Trainings Attended: <strong><%= player.trainingsAttended %></strong></li>
+    <li>Submissions: <strong><%= player.submissions %></strong></li>
+    <li>Takedowns: <strong><%= player.takedowns %></strong></li>
+  </ul>
+</body>
+</html>
+
+

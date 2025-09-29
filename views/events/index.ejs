@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - Dojo App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      margin: 0;
+    }
+    .nav-links {
+      margin-top: 10px;
+    }
+    .nav-links a {
+      color: #ecf0f1;
+      text-decoration: none;
+      margin-right: 20px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      background-color: #34495e;
+    }
+    .nav-links a:hover {
+      background-color: #3498db;
+    }
+    .admin-actions {
+      background-color: #e74c3c;
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .admin-actions a {
+      color: white;
+      text-decoration: none;
+      margin-right: 15px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      background-color: #c0392b;
+    }
+    .admin-actions a:hover {
+      background-color: #a93226;
+    }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+    }
+    .event-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-left: 4px solid #3498db;
+    }
+    .event-card.class-training {
+      border-left-color: #e74c3c;
+    }
+    .event-card.upcoming-event {
+      border-left-color: #27ae60;
+    }
+    .event-title {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+    .event-type {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .event-type.class-training {
+      background-color: #e74c3c;
+      color: white;
+    }
+    .event-type.upcoming-event {
+      background-color: #27ae60;
+      color: white;
+    }
+    .event-details {
+      margin: 10px 0;
+    }
+    .event-details p {
+      margin: 5px 0;
+      color: #555;
+    }
+    .event-details strong {
+      color: #2c3e50;
+    }
+    .event-actions {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #ecf0f1;
+    }
+    .event-actions a {
+      color: #3498db;
+      text-decoration: none;
+      margin-right: 10px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      border: 1px solid #3498db;
+    }
+    .event-actions a:hover {
+      background-color: #3498db;
+      color: white;
+    }
+    .no-events {
+      text-align: center;
+      padding: 40px;
+      color: #7f8c8d;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Dojo Events & Training</h1>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <% if (user) { %>
+        <a href="/auth/sign-out">Sign Out</a>
+      <% } else { %>
+        <a href="/auth/sign-in">Sign In</a>
+        <a href="/auth/sign-up">Sign Up</a>
+      <% } %>
+    </div>
+  </div>
+
+  <% if (user && user.role === 'admin') { %>
+    <div class="admin-actions">
+      <strong>Admin Actions:</strong>
+      <a href="/events/new">Create New Event</a>
+      <a href="/events/new?type=class-training">Create Class Training</a>
+      <a href="/events/new?type=upcoming-event">Create Upcoming Event</a>
+    </div>
+  <% } %>
+
+  <% if (events && events.length > 0) { %>
+    <div class="events-grid">
+      <% events.forEach(event => { %>
+        <div class="event-card <%= event.eventType %>">
+          <div class="event-type <%= event.eventType %>">
+            <%= event.eventType === 'class-training' ? 'Class Training' : 'Upcoming Event' %>
+          </div>
+          <div class="event-title"><%= event.title %></div>
+          <div class="event-details">
+            <p><strong>Description:</strong> <%= event.description %></p>
+            <p><strong>Date:</strong> <%= new Date(event.date).toLocaleDateString() %></p>
+            <p><strong>Time:</strong> <%= event.time %></p>
+            <p><strong>Location:</strong> <%= event.location %></p>
+            <p><strong>Instructor:</strong> <%= event.instructor %></p>
+            <p><strong>Price:</strong> $<%= event.price %></p>
+            <p><strong>Participants:</strong> <%= event.currentParticipants %>/<%= event.maxParticipants %></p>
+          </div>
+          <div class="event-actions">
+            <a href="/events/<%= event._id %>">View Details</a>
+            <% if (user && user.role === 'admin') { %>
+              <a href="/events/<%= event._id %>/edit">Edit</a>
+            <% } %>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  <% } else { %>
+    <div class="no-events">
+      <p>No events available at the moment.</p>
+      <% if (user && user.role === 'admin') { %>
+        <p><a href="/events/new" style="color: #e74c3c; text-decoration: none;">Create your first event!</a></p>
+      <% } %>
+    </div>
+  <% } %>
+</body>
+</html>

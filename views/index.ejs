@@ -3,21 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+  <title>Dojo App - Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 30px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    .welcome-section {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .nav-links a {
+      color: #ecf0f1;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      background-color: #34495e;
+      transition: background-color 0.3s;
+    }
+    .nav-links a:hover {
+      background-color: #3498db;
+    }
+    .admin-section {
+      background-color: #e8f5e8;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #27ae60;
+      margin-bottom: 20px;
+    }
+    .admin-section h3 {
+      margin-top: 0;
+      color: #27ae60;
+    }
+    .admin-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+    .admin-actions a {
+      background-color: #27ae60;
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .admin-actions a:hover {
+      background-color: #229954;
+    }
+    .events-preview {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .events-preview h3 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 15px;
+    }
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+  </style>
 </head>
 <body>
-<% if (user) { %>
-<h1>Welcome to the app, <%= user.username %>!</h1>
-<p>
-  <a href="/auth/sign-out">Sign out</a>
-</p>
-<% } else { %>
-<h1>Welcome to the app, guest.</h1>
-<p>
-  <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">Sign in</a>.
-</p>
-<% } %>
-<p><a href="/vip-lounge">Get into the VIP Users Only lounge!</a></p>
+  <div class="header">
+    <h1>🏯 Dojo App</h1>
+    <p>Your martial arts training and event management system</p>
+  </div>
 
+  <div class="welcome-section">
+    <% if (user) { %>
+      <h2>Welcome back, <%= user.username %>!</h2>
+      <p>You are signed in as: <strong><%= user.role %></strong></p>
+      
+      <% if (user.role === 'admin') { %>
+        <div class="admin-section">
+          <h3>🎯 Admin Dashboard</h3>
+          <p>As an admin, you can create and manage class training sessions and upcoming events.</p>
+          <div class="admin-actions">
+            <a href="/events/new">Create New Event</a>
+            <a href="/events/new?type=class-training">Create Class Training</a>
+            <a href="/events/new?type=upcoming-event">Create Upcoming Event</a>
+            <a href="/events">Manage All Events</a>
+          </div>
+        </div>
+      <% } %>
+      
+      <div class="nav-links">
+        <a href="/events">View All Events</a>
+        <a href="/auth/sign-out">Sign Out</a>
+      </div>
+    <% } else { %>
+      <h2>Welcome to Dojo App!</h2>
+      <p>Sign in to access class training sessions and upcoming events.</p>
+      <div class="nav-links">
+        <a href="/auth/sign-up">Sign Up</a>
+        <a href="/auth/sign-in">Sign In</a>
+        <a href="/events">View Events (Public)</a>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="events-preview">
+    <h3>📅 Upcoming Events & Training</h3>
+    <p>Discover our class training sessions and upcoming events. Whether you're looking to improve your skills or participate in special events, we have something for everyone.</p>
+    <a href="/events" class="btn-primary">Browse All Events</a>
+  </div>
 </body>
 </html>

@@ -31,7 +31,8 @@ router.post('/sign-up', async (req, res) => {
 
   req.session.user = {
     username: newUser.username,
-    _id: newUser._id
+    _id: newUser._id,
+    role: newUser.role,
   };
 
   req.session.save(() => {
@@ -55,6 +56,7 @@ router.post('/sign-in', async (req, res) => {
   req.session.user = {
     username: userInDatabase.username,
     _id: userInDatabase._id,
+    role: userInDatabase.role,
   };
 
   req.session.save(() => {

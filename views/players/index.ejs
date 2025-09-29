@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Players</title>
+</head>
+<body>
+  <h1>Players</h1>
+  <p><a href="/">Home</a></p>
+
+  <% if (!players || players.length === 0) { %>
+    <p>No players found.</p>
+  <% } else { %>
+    <table border="1" cellpadding="6" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Belt</th>
+          <th>Age</th>
+          <th>Weight (kg)</th>
+          <th>Wins</th>
+          <th>Losses</th>
+          <th>Draws</th>
+          <th>Trainings</th>
+          <th>Submissions</th>
+          <th>Takedowns</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% players.forEach(p => { %>
+          <tr>
+            <td><%= p.name %></td>
+            <td><%= p.belt %></td>
+            <td><%= p.age ?? '-' %></td>
+            <td><%= p.weightKg ?? '-' %></td>
+            <td><%= p.wins %></td>
+            <td><%= p.losses %></td>
+            <td><%= p.draws %></td>
+            <td><%= p.trainingsAttended %></td>
+            <td><%= p.submissions %></td>
+            <td><%= p.takedowns %></td>
+            <td><a href="/players/<%= p._id %>">View</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</body>
+</html>
+
+

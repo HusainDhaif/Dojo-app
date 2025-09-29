@@ -12,15 +12,20 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
+const requireRole = require('./middleware/require-role.js');
 
 // Controllers
 const authController = require('./controllers/auth.js');
+const eventsController = require('./controllers/events.js');
+const playersController = require('./controllers/players.js');
 
 // Set the port from environment variable or default to 3000
 const PORT = process.env.PORT ? process.env.PORT : '3000';
 
 // MIDDLEWARE
 //
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
 // Middleware to parse URL-encoded data from forms
 app.use(express.urlencoded({ extended: false }));
 // Middleware for using HTTP verbs such as PUT or DELETE
@@ -49,11 +54,18 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authController);
+app.use('/events', eventsController);
+app.use('/players', playersController);
 
-// PROTECTED
+// PROTECTED ROUTES
 
-app.get('/vip-lounge', isSignedIn, (req, res) => {
-  res.send(`Welcome to the party ${req.session.user.username}.`);
+// Admin-only routes for event management
+app.get('/admin/events', isSignedIn, requireRole('admin'), (req, res) => {
+  res.redirect('/events');
+});
+
+app.get('/admin/events/new', isSignedIn, requireRole('admin'), (req, res) => {
+  res.redirect('/events/new');
 });
 
 app.listen(PORT, () => {
