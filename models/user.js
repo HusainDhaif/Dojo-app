@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   },
   belt: {
     type: String,
-    enum: ['white', 'blue', 'purple', 'brown', 'black'],
+    enum: ['white', 'orange', 'orange 2', 'blue', 'blue 2', 'yellow', 'yellow 2', 'green', 'green 2', 'brown', 'brown 2', 'black'],
   },
   age: {
     type: Number,

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const playerSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
-  belt: { type: String, enum: ['white', 'yellow', 'green', 'blue', 'red', 'black'], default: 'white' },
+  belt: { type: String, enum: ['white', 'orange', 'orange 2', 'blue', 'blue 2', 'yellow', 'yellow 2', 'green', 'green 2', 'brown', 'brown 2', 'black'], default: 'white' },
   weightKg: { type: Number, min: 0 },
   age: { type: Number, min: 0 },
   wins: { type: Number, default: 0, min: 0 },
