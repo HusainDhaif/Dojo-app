@@ -172,6 +172,19 @@
           </div>
           <div class="event-actions">
             <a href="/events/<%= event._id %>">View Details</a>
+            <% if (user) { %>
+              <% const isParticipant = (event.participants || []).some(p => String((p._id || p)) === String(user._id)); %>
+              <% if (!isParticipant && event.currentParticipants < event.maxParticipants) { %>
+                <form action="/events/<%= event._id %>/book" method="POST" style="display:inline;">
+                  <button type="submit">Book</button>
+                </form>
+              <% } %>
+              <% if (isParticipant) { %>
+                <form action="/events/<%= event._id %>/unbook" method="POST" style="display:inline;">
+                  <button type="submit">Cancel</button>
+                </form>
+              <% } %>
+            <% } %>
             <% if (user && user.role === 'admin') { %>
               <a href="/events/<%= event._id %>/edit">Edit</a>
             <% } %>

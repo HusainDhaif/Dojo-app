@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile</title>
+</head>
+<body>
+  <p><a href="/users/me">Back to Profile</a></p>
+  <h1>Edit My Profile</h1>
+  <form action="/users/me?_method=PUT" method="POST">
+    <div>
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" name="fullName" value="<%= userProfile.fullName || '' %>">
+    </div>
+
+    <div>
+      <label for="bio">Bio</label>
+      <textarea id="bio" name="bio" rows="4"><%= userProfile.bio || '' %></textarea>
+    </div>
+
+    <div>
+      <label for="belt">Belt</label>
+      <select id="belt" name="belt">
+        <option value="" <%= !userProfile.belt ? 'selected' : '' %> >--</option>
+        <option value="white" <%= userProfile.belt === 'white' ? 'selected' : '' %> >white</option>
+        <option value="blue" <%= userProfile.belt === 'blue' ? 'selected' : '' %> >blue</option>
+        <option value="purple" <%= userProfile.belt === 'purple' ? 'selected' : '' %> >purple</option>
+        <option value="brown" <%= userProfile.belt === 'brown' ? 'selected' : '' %> >brown</option>
+        <option value="black" <%= userProfile.belt === 'black' ? 'selected' : '' %> >black</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" min="0" value="<%= userProfile.age ?? '' %>">
+    </div>
+
+    <div>
+      <label for="weightKg">Weight (kg)</label>
+      <input type="number" id="weightKg" name="weightKg" min="0" step="0.1" value="<%= userProfile.weightKg ?? '' %>">
+    </div>
+
+    <button type="submit">Save</button>
+  </form>
+</body>
+</html>
+
+

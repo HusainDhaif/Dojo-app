@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile</title>
+</head>
+<body>
+  <p><a href="/">Home</a></p>
+  <h1>My Profile</h1>
+  <ul>
+    <li>Username: <strong><%= userProfile.username %></strong></li>
+    <li>Full Name: <strong><%= userProfile.fullName || '-' %></strong></li>
+    <li>Bio: <strong><%= userProfile.bio || '-' %></strong></li>
+    <li>Belt: <strong><%= userProfile.belt || '-' %></strong></li>
+    <li>Age: <strong><%= userProfile.age ?? '-' %></strong></li>
+    <li>Weight (kg): <strong><%= userProfile.weightKg ?? '-' %></strong></li>
+  </ul>
+
+  <p><a href="/users/me/edit">Edit Profile</a></p>
+</body>
+</html>
+
+

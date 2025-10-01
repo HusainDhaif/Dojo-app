@@ -15,6 +15,27 @@ const userSchema = new mongoose.Schema({
     default: 'user',
     required: true,
   },
+  // Optional profile fields
+  fullName: {
+    type: String,
+  },
+  bio: {
+    type: String,
+  },
+  belt: {
+    type: String,
+    enum: ['white', 'blue', 'purple', 'brown', 'black'],
+  },
+  age: {
+    type: Number,
+    min: 0,
+  },
+  weightKg: {
+    type: Number,
+    min: 0,
+  },
+}, {
+  timestamps: true,
 });
 
 const User = mongoose.model('User', userSchema);

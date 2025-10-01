@@ -232,6 +232,19 @@
 
     <div class="event-actions">
       <a href="/events" class="btn btn-secondary">Back to Events</a>
+      <% if (user) { %>
+        <% const isParticipant = (event.participants || []).some(p => String(p._id || p) === String(user._id)); %>
+        <% if (!isParticipant && event.currentParticipants < event.maxParticipants) { %>
+          <form action="/events/<%= event._id %>/book" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-primary">Book This Event</button>
+          </form>
+        <% } %>
+        <% if (isParticipant) { %>
+          <form action="/events/<%= event._id %>/unbook" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-warning">Cancel Booking</button>
+          </form>
+        <% } %>
+      <% } %>
       <% if (user && user.role === 'admin') { %>
         <a href="/events/<%= event._id %>/edit" class="btn btn-warning">Edit Event</a>
         <form action="/events/<%= event._id %>?_method=DELETE" method="POST" style="display: inline;">
@@ -246,6 +259,21 @@
         <p>Last updated: <%= new Date(event.updatedAt).toLocaleDateString() %></p>
       <% } %>
     </div>
+
+    <% if (user && user.role === 'admin') { %>
+      <div class="participants-info" style="margin-top:20px;">
+        <h3>Participants List</h3>
+        <% if (event.participants && event.participants.length) { %>
+          <ul>
+            <% event.participants.forEach(p => { %>
+              <li><%= p.username || p %></li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p>No participants yet.</p>
+        <% } %>
+      </div>
+    <% } %>
   </div>
 </body>
 </html>

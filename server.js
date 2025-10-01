@@ -18,6 +18,7 @@ const requireRole = require('./middleware/require-role.js');
 const authController = require('./controllers/auth.js');
 const eventsController = require('./controllers/events.js');
 const playersController = require('./controllers/players.js');
+const usersController = require('./controllers/users.js');
 
 // Set the port from environment variable or default to 3000
 const PORT = process.env.PORT ? process.env.PORT : '3000';
@@ -56,6 +57,7 @@ app.get('/', (req, res) => {
 app.use('/auth', authController);
 app.use('/events', eventsController);
 app.use('/players', playersController);
+app.use('/users', usersController);
 
 // PROTECTED ROUTES
 
