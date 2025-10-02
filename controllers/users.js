@@ -1,5 +1,6 @@
 const express = require('express');
 const isSignedIn = require('../middleware/is-signed-in');
+const requireRole = require('../middleware/require-role');
 const User = require('../models/user');
 const Event = require('../models/event');
 
@@ -59,6 +60,30 @@ router.get('/me/bookings', isSignedIn, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send('Error loading your bookings');
+  }
+});
+
+
+// ADMIN: List all users
+router.get('/', isSignedIn, requireRole('admin'), async (req, res) => {
+  try {
+    const users = await User.find({}).sort({ username: 1 }).lean();
+    res.render('users/index.ejs', { users });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error loading users');
+  }
+});
+
+// ADMIN: Show any user's profile
+router.get('/:id', isSignedIn, requireRole('admin'), async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).send('User not found');
+    res.render('users/show.ejs', { userProfile: user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error loading user');
   }
 });
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Users</title>
+</head>
+<body>
+  <p><a href="/">Home</a></p>
+  <h1>All Users</h1>
+
+  <% if (!users || users.length === 0) { %>
+    <p>No users found.</p>
+  <% } else { %>
+    <table border="1" cellpadding="6" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Full Name</th>
+          <th>Belt</th>
+          <th>Age</th>
+          <th>Weight (kg)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(u => { %>
+          <tr>
+            <td><%= u.username %></td>
+            <td><%= u.role %></td>
+            <td><%= u.fullName || '-' %></td>
+            <td><%= u.belt || '-' %></td>
+            <td><%= u.age ?? '-' %></td>
+            <td><%= u.weightKg ?? '-' %></td>
+            <td><a href="/users/<%= u._id %>">View</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</body>
+</html>
+
+

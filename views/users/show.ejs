@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+</head>
+<body>
+  <p><a href="/users">Back to Users</a> | <a href="/">Home</a></p>
+  <h1>User Profile</h1>
+  <ul>
+    <li>Username: <strong><%= userProfile.username %></strong></li>
+    <li>Role: <strong><%= userProfile.role %></strong></li>
+    <li>Full Name: <strong><%= userProfile.fullName || '-' %></strong></li>
+    <li>Bio: <strong><%= userProfile.bio || '-' %></strong></li>
+    <li>Belt: <strong><%= userProfile.belt || '-' %></strong></li>
+    <li>Age: <strong><%= userProfile.age ?? '-' %></strong></li>
+    <li>Weight (kg): <strong><%= userProfile.weightKg ?? '-' %></strong></li>
+    <li>Joined: <strong><%= new Date(userProfile.createdAt).toLocaleDateString() %></strong></li>
+    <li>Last Updated: <strong><%= new Date(userProfile.updatedAt).toLocaleDateString() %></strong></li>
+  </ul>
+</body>
+</html>
+
+
