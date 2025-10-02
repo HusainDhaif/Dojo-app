@@ -4,15 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Players</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 1100px; margin:0 auto; padding:20px; background:#f5f5f5; color:#2c3e50; }
+    a { color:#3498db; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    h1 { margin-bottom:16px; }
+    .card { background:#fff; border-radius:8px; padding:16px; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
+    table { width:100%; border-collapse: collapse; }
+    th, td { text-align:left; padding:10px; border-bottom:1px solid #ecf0f1; }
+    th { background:#eef5fb; }
+    tr:hover { background:#fafafa; }
+  </style>
 </head>
 <body>
   <h1>Players</h1>
   <p><a href="/">Home</a></p>
 
   <% if (!players || players.length === 0) { %>
-    <p>No players found.</p>
+    <div class="card"><p>No players found.</p></div>
   <% } else { %>
-    <table border="1" cellpadding="6" cellspacing="0">
+    <div class="card">
+    <table>
       <thead>
         <tr>
           <th>Name</th>
@@ -46,6 +58,7 @@
         <% }) %>
       </tbody>
     </table>
+    </div>
   <% } %>
 </body>
 </html>

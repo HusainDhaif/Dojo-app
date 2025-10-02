@@ -4,22 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= player.name %> - Stats</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin:0 auto; padding:20px; background:#f5f5f5; color:#2c3e50; }
+    a { color:#3498db; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    h1 { margin-bottom:8px; }
+    .card { background:#fff; border-radius:8px; padding:24px; box-shadow:0 2px 4px rgba(0,0,0,0.1); margin-top:16px; }
+    ul { list-style:none; padding:0; margin:0; }
+    li { padding:8px 0; border-bottom:1px solid #ecf0f1; }
+    li:last-child { border-bottom:none; }
+  </style>
 </head>
 <body>
   <p><a href="/players">Back to Players</a></p>
   <h1><%= player.name %> - Stats</h1>
-  <ul>
-    <li>Belt: <strong><%= player.belt %></strong></li>
-    <li>Age: <strong><%= player.age ?? '-' %></strong></li>
-    <li>Weight (kg): <strong><%= player.weightKg ?? '-' %></strong></li>
-    <li>Wins: <strong><%= player.wins %></strong></li>
-    <li>Losses: <strong><%= player.losses %></strong></li>
-    <li>Draws: <strong><%= player.draws %></strong></li>
-    <li>Total Fights: <strong><%= player.wins + player.losses + player.draws %></strong></li>
-    <li>Trainings Attended: <strong><%= player.trainingsAttended %></strong></li>
-    <li>Submissions: <strong><%= player.submissions %></strong></li>
-    <li>Takedowns: <strong><%= player.takedowns %></strong></li>
-  </ul>
+  <div class="card">
+    <ul>
+      <li>Belt: <strong><%= player.belt %></strong></li>
+      <li>Age: <strong><%= player.age ?? '-' %></strong></li>
+      <li>Weight (kg): <strong><%= player.weightKg ?? '-' %></strong></li>
+      <li>Wins: <strong><%= player.wins %></strong></li>
+      <li>Losses: <strong><%= player.losses %></strong></li>
+      <li>Draws: <strong><%= player.draws %></strong></li>
+      <li>Total Fights: <strong><%= player.wins + player.losses + player.draws %></strong></li>
+      <li>Trainings Attended: <strong><%= player.trainingsAttended %></strong></li>
+      <li>Submissions: <strong><%= player.submissions %></strong></li>
+      <li>Takedowns: <strong><%= player.takedowns %></strong></li>
+    </ul>
+  </div>
 </body>
 </html>
 

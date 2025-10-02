@@ -4,20 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+      color: #2c3e50;
+    }
+    a { color: #3498db; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-top: 16px;
+    }
+    h1 { margin-bottom: 8px; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { padding: 8px 0; border-bottom: 1px solid #ecf0f1; }
+    li:last-child { border-bottom: none; }
+    .actions { margin-top: 16px; }
+    .btn { display: inline-block; background:#34495e; color:#fff; padding:10px 16px; border-radius:4px; }
+    .btn:hover { background:#2c3e50; }
+  </style>
 </head>
 <body>
   <p><a href="/">Home</a></p>
   <h1>My Profile</h1>
-  <ul>
-    <li>Username: <strong><%= userProfile.username %></strong></li>
-    <li>Full Name: <strong><%= userProfile.fullName || '-' %></strong></li>
-    <li>Bio: <strong><%= userProfile.bio || '-' %></strong></li>
-    <li>Belt: <strong><%= userProfile.belt || '-' %></strong></li>
-    <li>Age: <strong><%= userProfile.age ?? '-' %></strong></li>
-    <li>Weight (kg): <strong><%= userProfile.weightKg ?? '-' %></strong></li>
-  </ul>
-
-  <p><a href="/users/me/edit">Edit Profile</a></p>
+  <div class="card">
+    <ul>
+      <li>Username: <strong><%= userProfile.username %></strong></li>
+      <li>Full Name: <strong><%= userProfile.fullName || '-' %></strong></li>
+      <li>Bio: <strong><%= userProfile.bio || '-' %></strong></li>
+      <li>Belt: <strong><%= userProfile.belt || '-' %></strong></li>
+      <li>Age: <strong><%= userProfile.age ?? '-' %></strong></li>
+      <li>Weight (kg): <strong><%= userProfile.weightKg ?? '-' %></strong></li>
+    </ul>
+    <div class="actions">
+      <a class="btn" href="/users/me/edit">Edit Profile</a>
+    </div>
+  </div>
 </body>
 </html>
 
